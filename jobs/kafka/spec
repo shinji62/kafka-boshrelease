@@ -6,38 +6,35 @@ packages:
   - java
 
 templates:
-  bin/monit_debugger: bin/monit_debugger
   bin/kafka_ctl: bin/kafka_ctl
   config/log4j.properties.erb: config/log4j.properties
   config/server.properties.erb: config/server.properties
-  data/properties.sh.erb: data/properties.sh
-  helpers/ctl_setup.sh: helpers/ctl_setup.sh
-  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+
 
 properties:
-  kafka.zookeeper_connect:
+  zookeeper_connect:
     description: Zookeeper connection string
-  kafka.port:
+  port:
     description: The port the socket server listens on
     default: 9092
-  kafka.index_offset:
+  index_offset:
     description: "Offset value to add to the spec.index"
     default: 0
-  kafka.log_dirs:
+  log_dirs:
     description: Directory under which to store log files
     default: /var/vcap/store/kafka
-  kafka.log_flush_interval_ms:
+  log_flush_interval_ms:
     description: The maximum amount of time a message can sit in a log before we force a flush
     default: 1000
-  kafka.log_retention_hours:
+  log_retention_hours:
     description: The minimum age of a log file to be eligible for deletion
     default: 168
-  kafka.auto_create_topics_enable:
+  auto_create_topics_enable:
     description: Enable auto creation of topic on the server
     default: true
-  kafka.delete_topic_enable:
+  delete_topic_enable:
     description: Enable delete topic
     default: false
-  kafka.num_network_threads:
+  num_network_threads:
     description: The number of threads handling network requests
     default: 3

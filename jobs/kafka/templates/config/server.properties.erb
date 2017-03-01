@@ -17,12 +17,12 @@
 ############################# Server Basics #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
-broker.id=<%= index + p("kafka.index_offset") %>
+broker.id=<%= index + p("index_offset") %>
 
 ############################# Socket Server Settings #############################
 
 # The port the socket server listens on
-port=<%= p("kafka.port") %>
+port=<%= p("port") %>
 
 # Hostname the broker will bind to. If not set, the server will bind to all interfaces
 #host.name=localhost
@@ -30,6 +30,7 @@ port=<%= p("kafka.port") %>
 # Hostname the broker will advertise to producers and consumers. If not set, it uses the
 # value for "host.name" if configured.  Otherwise, it will use the value returned from
 # java.net.InetAddress.getCanonicalHostName().
+
 advertised.host.name=<%= spec.networks.marshal_dump.first[1].ip %>
 
 # The port to publish to ZooKeeper for clients to use. If this is not set,
@@ -37,7 +38,7 @@ advertised.host.name=<%= spec.networks.marshal_dump.first[1].ip %>
 #advertised.port=<port accessible by clients>
 
 # The number of threads handling network requests
-num.network.threads=<%= p("kafka.num_network_threads") %>
+num.network.threads=<%= p("num_network_threads") %>
 
 # The number of threads doing disk I/O
 num.io.threads=8
@@ -55,7 +56,7 @@ socket.request.max.bytes=104857600
 ############################# Log Basics #############################
 
 # A comma seperated list of directories under which to store log files
-log.dirs=<%= p("kafka.log_dirs") %>
+log.dirs=<%= p("log_dirs") %>
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
@@ -67,7 +68,7 @@ num.partitions=1
 num.recovery.threads.per.data.dir=1
 
 # Enable auto creation of topic on the server.
-auto.create.topics.enable=<%= p("kafka.auto_create_topics_enable") %>
+auto.create.topics.enable=<%= p("auto_create_topics_enable") %>
 
 ############################# Log Flush Policy #############################
 
@@ -84,7 +85,7 @@ auto.create.topics.enable=<%= p("kafka.auto_create_topics_enable") %>
 #log.flush.interval.messages=10000
 
 # The maximum amount of time a message can sit in a log before we force a flush
-log.flush.interval.ms=<%= p("kafka.log_flush_interval_ms") %>
+log.flush.interval.ms=<%= p("log_flush_interval_ms") %>
 
 ############################# Log Retention Policy #############################
 
@@ -94,7 +95,7 @@ log.flush.interval.ms=<%= p("kafka.log_flush_interval_ms") %>
 # from the end of the log.
 
 # The minimum age of a log file to be eligible for deletion
-log.retention.hours=<%= p("kafka.log_retention_hours") %>
+log.retention.hours=<%= p("log_retention_hours") %>
 
 # A size-based retention policy for logs. Segments are pruned from the log as long as the remaining
 # segments don't drop below log.retention.bytes.
@@ -112,7 +113,7 @@ log.retention.check.interval.ms=300000
 log.cleaner.enable=false
 
 # Enable delete topic.
-delete.topic.enable=<%= p("kafka.delete_topic_enable") %>
+delete.topic.enable=<%= p("delete_topic_enable") %>
 
 ############################# Zookeeper #############################
 
@@ -121,7 +122,7 @@ delete.topic.enable=<%= p("kafka.delete_topic_enable") %>
 # server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
-zookeeper.connect=<%= p("kafka.zookeeper_connect").flatten.map { |host| (host =~ /\:[0-9]+/ ? "#{host}":"#{host}:2181") }.join(",") %>
+zookeeper.connect=<%= p("zookeeper_connect").flatten.map { |host| (host =~ /\:[0-9]+/ ? "#{host}":"#{host}:2181") }.join(",") %>
 
 # Timeout in ms for connecting to zookeeper
 zookeeper.connection.timeout.ms=6000
